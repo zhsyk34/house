@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="null" debug="null">
+
+    <!-- Console appender, for testing -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{ABSOLUTE} %c:%L - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- File appender for application logging -->
+    <appender name="LOG" class="org.apache.log4j.RollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/logs/Spring/spring-jpa.log"/>
+        <param name="MaxFileSize" value="2MB"/>
+        <param name="MaxBackupIndex" value="1"/>
+        <param name="append" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{ABSOLUTE} %c:%L - %m%n"/>
+        </layout>
+    </appender>
+
+    <category name="org.madbit" additivity="false">
+        <priority value="DEBUG"/>
+        <appender-ref ref="LOG"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <!-- Root category level setting -->
+    <root>
+        <priority value="ERROR"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOG"/>
+    </root>
+
+</log4j:configuration>
